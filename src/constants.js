@@ -1,3 +1,3 @@
 const COOKIE_NAME = "user_auth";
 
-module.exports = COOKIE_NAME;
+module.exports = { COOKIE_NAME };

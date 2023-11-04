@@ -1,6 +1,7 @@
+const bcrypt = require("bcryptjs");
 const { COOKIE_NAME } = require("../../constants");
 const User = require("../../models/User/user.model");
-const bcrypt = require("bcryptjs");
+const { CreateToken } = require("../../utils/CreateToken");
 
 const getAllUsers = async (req, res) => {
   try {
@@ -44,6 +45,30 @@ const userLogin = async (req, res) => {
     if (!isPassword) {
       return res.status(403).send("Incorrect Password");
     }
+
+    // Clearing Cookies Before Generating Token
+    res.clearCookie(COOKIE_NAME, {
+      httpOnly: true,
+      domain: "localhost",
+      signed: true,
+      path: "/",
+    });
+
+    // Generating Token
+    const Token = CreateToken(user._id, user.email, "24h");
+    const expires = new Date();
+    expires.setDate(expires.getDate() + 1);
+
+    //Assigning Token In Http-only Cookies
+    res.cookie(COOKIE_NAME, Token, {
+      path: "/",
+      domain: "localhost",
+      expires,
+      httpOnly: true,
+      signed: true,
+    });
+
+    // Success Response of Login
     return res.status(200).json({ msg: "User Login Successfully...", name: user.username, email: user.email });
   } catch (error) {
     console.log(error);
