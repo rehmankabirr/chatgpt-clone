@@ -13,13 +13,11 @@ const getAllUsers = async (req, res) => {
 const userSignup = async (req, res) => {
   const { username, email, password } = req.body;
   try {
-    if (!username || !email || !password) {
-      return res.status(406).json({ msg: "All Fields must be completed" });
-    }
-    const isExistUser = await User.findOne({ email });
+    const isExistUser = await User.exists({ email });
     if (isExistUser) {
       return res.status(403).json({ msg: "User Already Exist" });
     }
+
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     const newUser = await User({ username, email, password: hashedPassword });
@@ -34,11 +32,9 @@ const userSignup = async (req, res) => {
 const userLogin = async (req, res) => {
   const { email, password } = req.body;
   try {
-    if (!email || !password) {
-      return res.status(406).json({ msg: "All Fields must be completed" });
-    }
     const user = await User.findOne({ email });
     const isPassword = await bcrypt.compare(password, user.password);
+
     if (!user) {
       return res.status(401).send("User not registered");
     }
