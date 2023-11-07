@@ -1,6 +1,6 @@
 const express = require("express");
 const userRoute = require("./User/userRoute");
-const chatRoute = require("./User/chatRoute");
+const chatRoute = require("./Chat/chatRoute");
 const appRouter = express.Router();
 
 appRouter.use("/user", userRoute);
