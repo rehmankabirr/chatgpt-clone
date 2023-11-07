@@ -35,7 +35,7 @@ const userLogin = async (req, res) => {
     const user = await User.findOne({ email });
     const isPassword = await bcrypt.compare(password, user.password);
 
-    if (!user) {
+    if (!user?.email) {
       return res.status(401).send("User not registered");
     }
     if (!isPassword) {
