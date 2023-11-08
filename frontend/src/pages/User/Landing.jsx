@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Landing = () => {
   return (
     <div className="flex min-h-full w-screen flex-col sm:supports-[min-height:100dvh]:min-h-[100dvh] md:grid md:grid-cols-2 lg:grid-cols-[60%_40%] bg-[#00002e]">
@@ -16,7 +18,7 @@ const Landing = () => {
           </div>
         </div>
       </div>
-      <div className="relative flex grow flex-col items-center justify-between bg-white px-5 py-8 text-black dark:bg-black dark:text-white sm:rounded-t-[30px] md:rounded-none md:px-6">
+      <div className="relative flex grow h-screen flex-col items-center justify-between bg-white px-5 py-8 text-black dark:bg-black dark:text-white sm:rounded-t-[30px] md:rounded-none md:px-6">
         <nav className="flex w-full justify-start px-6 pb-8 md:hidden md:px-6 lg:px-8">
           <h1 aria-label="ChatGPT by OpenAI">
             <div className="flex cursor-default items-center text-[20px] font-bold font-nunito leading-none lg:text-[22px]">
@@ -32,15 +34,19 @@ const Landing = () => {
           </h2>
           <div className="mt-5 w-full max-w-[440px]">
             <div className="grid gap-x-3 gap-y-2 sm:grid-cols-2 sm:gap-y-0">
-              <button
+              <Link
+                to="/login"
                 className="relative flex h-12 items-center justify-center rounded-md text-center text-base font-medium bg-[#3C46FF] text-[#fff] hover:bg-[#0000FF]"
                 data-testid="login-button"
               >
                 <div className="relative font-semibold top-[1px] font-nunito">Log in</div>
-              </button>
-              <button className="relative flex h-12 items-center justify-center rounded-md text-center text-base font-medium bg-[#3C46FF] text-[#fff] hover:bg-[#0000FF]">
+              </Link>
+              <Link
+                to="/register"
+                className="relative flex h-12 items-center justify-center rounded-md text-center text-base font-medium bg-[#3C46FF] text-[#fff] hover:bg-[#0000FF]"
+              >
                 <div className="relative font-semibold top-[1px] font-nunito">Sign up</div>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -58,21 +64,11 @@ const Landing = () => {
             </svg>
           </div>
           <div className="py-3 text-xs">
-            <a
-              href="https://openai.com/policies/terms-of-use"
-              target="_blank"
-              className="mx-3 text-gray-500 font-nunito"
-              rel="noreferrer"
-            >
+            <a href="/" target="_blank" className="mx-3 text-gray-500 font-nunito" rel="noreferrer">
               Terms of use
             </a>
             <span className="text-gray-600">|</span>
-            <a
-              href="https://openai.com/policies/privacy-policy"
-              target="_blank"
-              className="mx-3 text-gray-500 font-nunito"
-              rel="noreferrer"
-            >
+            <a href="/" target="_blank" className="mx-3 text-gray-500 font-nunito" rel="noreferrer">
               Privacy policy
             </a>
           </div>

@@ -17,10 +17,14 @@ const Validate = (validations) => {
 };
 
 const LoginValidator = [
-  body("email").trim().isEmail().withMessage("Email is required"),
-  body("password").trim().isLength({ min: 6 }).withMessage("Minimum lenght of password should contain 6 characters"),
+  body("email").trim().isEmail().notEmpty().withMessage("Email is required"),
+  body("password")
+    .trim()
+    .isLength({ min: 6 })
+    .notEmpty()
+    .withMessage("Minimum lenght of password should contain 6 characters"),
 ];
-const SignupValidator = [body("uername").notEmpty().withMessage("Name is required"), ...LoginValidator];
+const SignupValidator = [body("username").notEmpty().withMessage("Name is required"), ...LoginValidator];
 
 module.exports = {
   Validate,
